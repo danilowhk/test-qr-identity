@@ -15,7 +15,7 @@ import { ethers } from "ethers";
 
 
 
-export default function Home() {
+export default function GenerateId() {
 
   const [selected, setSelected] = useState("environment");
   const [startScan, setStartScan] = useState(false);
@@ -46,7 +46,6 @@ export default function Home() {
 
  
         const newIdentity = new Identity();
-        const group = new Group();
     
         const newIdentityCommitment = newIdentity.generateCommitment();
   
@@ -57,6 +56,8 @@ export default function Home() {
 
 
   }
+
+  
 
 
 

@@ -1,6 +1,5 @@
 import { useState } from "react";
 import dynamic from "next/dynamic";
-
 const QrReader = dynamic(() => import('react-qr-reader'), {
   ssr: false
   });
@@ -44,16 +43,13 @@ export default function Home() {
 
   const handleGenerateId = () => {
 
- 
-        const newIdentity = new Identity();
-        const group = new Group();
+      if(data){
+        const newIdentity = new Identity(data);
     
         const newIdentityCommitment = newIdentity.generateCommitment();
   
         setTestIdentity(newIdentityCommitment);
-        
-        const exportIdentity = newIdentity.toString();
-        console.log(exportIdentity);
+       }
 
 
   }
@@ -63,7 +59,43 @@ export default function Home() {
   return (
     <div className="flex flex-col gap-y-5 items-center justify-center">
     <h1>Hello World</h1>
-      <button className="bg-green-700 p-3 rounded-lg text-gray-200" onClick={handleGenerateId}>Generate Id</button>
+      <h2>
+        Last Scan:
+        {selected}
+      </h2>
+
+      <button className="bg-blue-700 p-3 rounded-lg text-gray-200"
+        onClick={() => {
+          setStartScan(!startScan);
+        }}
+      >
+        {startScan ? "Stop Scan" : "Start Scan"}
+      </button>
+      {startScan && (
+        <>
+          <select onChange={(e) => setSelected(e.target.value)}>
+            <option value={"environment"}>Back Camera</option>
+            <option value={"user"}>Front Camera</option>
+          </select>
+          <QrReader
+            facingMode={selected}
+            delay={1000}
+            onError={handleError}
+            onScan={handleScan}
+            // chooseDeviceId={()=>selected}
+            style={{ width: "300px" }}
+          />
+        </>
+      )}
+      {loadingScan && <p className="text-xl font-bold ">Please fit the Qr Code</p>}
+      {data ? (<div>
+        <p className="font-bold">QrCode Key is:</p>
+        <p >{data}</p>
+        </div>) : null}
+      {data? (<div className="flex items-center justify-center flex-col gap-y-2"><button className="bg-green-700 p-3 rounded-lg text-gray-200" onClick={handleGenerateId}>Generate Id</button>
+      <p className="text-xl font-bold">Identity</p>
+      <p className="text-xl break-all px-20">{testIdentity.toString()}</p>
+      </div>) : null }
     </div>
   )
 }
