@@ -88,10 +88,14 @@ export default function Home() {
         </>
       )}
       {loadingScan && <p className="text-xl font-bold ">Please fit the Qr Code</p>}
-      {data !== "" && <p>{data}</p>}
-      <button className="bg-green-700 p-3 rounded-lg text-gray-200" onClick={handleGenerateId}>Generate Id</button>
+      {data ? (<div>
+        <p className="font-bold">QrCode Key is:</p>
+        <p >{data}</p>
+        </div>) : null}
+      {data? (<div className="flex items-center justify-center flex-col gap-y-2"><button className="bg-green-700 p-3 rounded-lg text-gray-200" onClick={handleGenerateId}>Generate Id</button>
       <p className="text-xl font-bold">Identity</p>
-      <p className="text-xl break-words">{testIdentity.toString()}</p>
+      <p className="text-xl break-all px-20">{testIdentity.toString()}</p>
+      </div>) : null }
     </div>
   )
 }
