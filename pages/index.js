@@ -50,7 +50,7 @@ export default function Home() {
   
         setTestIdentity(newIdentityCommitment);
        }
-      
+
 
   }
 
@@ -64,7 +64,7 @@ export default function Home() {
         {selected}
       </h2>
 
-      <button
+      <button className="bg-blue-700 p-3 rounded-lg text-gray-200"
         onClick={() => {
           setStartScan(!startScan);
         }}
@@ -87,10 +87,11 @@ export default function Home() {
           />
         </>
       )}
-      {loadingScan && <p>Loading</p>}
+      {loadingScan && <p className="text-xl font-bold ">Please fit the Qr Code</p>}
       {data !== "" && <p>{data}</p>}
-      <button onClick={handleGenerateId}>Generate Id</button>
-      <h1>Identity: {testIdentity.toString()}</h1>
+      <button className="bg-green-700 p-3 rounded-lg text-gray-200" onClick={handleGenerateId}>Generate Id</button>
+      <p className="text-xl font-bold">Identity</p>
+      <p className="text-xl break-words">{testIdentity.toString()}</p>
     </div>
   )
 }
