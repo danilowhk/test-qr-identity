@@ -42,23 +42,22 @@ export default function Home() {
   };
 
   const handleGenerateId = () => {
+
+      if(data){
+        const newIdentity = new Identity(data);
     
-      const newIdentity = new Identity('secret-message');
-      const newTrapdoor = newIdentity.getTrapdoor();
-      const newNullifier = newIdentity.getNullifier();
-      const newIdentityCommitment = newIdentity.generateCommitment();
-      // console.log(newIdentityCommitment);
-
-      setTestIdentity(newIdentityCommitment);
-      // setTestIdentity(newIdentity);
-
+        const newIdentityCommitment = newIdentity.generateCommitment();
+  
+        setTestIdentity(newIdentityCommitment);
+       }
+      
 
   }
 
 
 
   return (
-    <div className="App">
+    <div className="flex flex-col gap-y-5 items-center justify-center">
     <h1>Hello World</h1>
       <h2>
         Last Scan:
