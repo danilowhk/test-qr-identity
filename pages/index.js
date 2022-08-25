@@ -39,10 +39,16 @@ export default function Home() {
   };
 
   const handleGenerateId = () => {
-    const newIdentity = new Identity(data);
-    const newIdentityCommitment = newIdentity.generateCommitment();
-    console.log(newIdentityCommitment);
-    setIdentity(newIdentityCommitment);
+    if(data){
+      const newIdentity = new Identity(data);
+      const newIdentityCommitment = newIdentity.generateCommitment();
+      console.log(newIdentityCommitment);
+      setIdentity(newIdentityCommitment);
+
+    } else {
+      console.log("please generate data");
+    }
+   
   }
 
   return (
