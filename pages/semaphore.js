@@ -1,10 +1,11 @@
-import { useState } from "react";
+import {useState} from "react";
+import { Identity } from "@semaphore-protocol/identity"
 import dynamic from "next/dynamic";
 const QrReader = dynamic(() => import('react-qr-reader'), {
   ssr: false
   });
-import { Identity } from "@semaphore-protocol/identity"
 import { Group } from "@semaphore-protocol/group"
+import  Semaphore  from "./utils/Semaphore.json"
 const { generateProof } =require("@semaphore-protocol/proof")
 const { verifyProof } = require("@semaphore-protocol/proof")
 const { packToSolidityProof } = require("@semaphore-protocol/proof");
@@ -13,17 +14,39 @@ import { ethers } from "ethers";
 
 
 
-
 export default function Home() {
+  const [identity,setIdentity] =useState("");
+  const [trapdoor,setTrapdoor] =useState("");
+  const [nullifier,setNullifier] =useState("");
+  const [identityCommitment,setIdentityCommitment] =useState("");
+
+
+
+  function generateNewId(){
+    const newIdentity = new Identity(data)
+    const newTrapdoor = newIdentity.getTrapdoor();
+    const newNullifier = newIdentity.getNullifier();
+    const newIdentityCommitment = newIdentity.generateCommitment();
+
+
+    console.log(newIdentity);
+    console.log(newTrapdoor);
+    console.log(newNullifier);
+    console.log(newIdentityCommitment);
+
+
+    setIdentity(newIdentity);
+    setTrapdoor(newTrapdoor);
+    setNullifier(newNullifier);
+    setIdentityCommitment(newIdentityCommitment);
+
+  }
 
   const [selected, setSelected] = useState("environment");
   const [startScan, setStartScan] = useState(false);
   const [loadingScan, setLoadingScan] = useState(false);
   const [data, setData] = useState("");
-  const [testIdentity,setTestIdentity] = useState("");
-  const [trapdoor,setTrapdoor] =useState("");
-  const [nullifier,setNullifier] =useState("");
-  const [identityCommitment,setIdentityCommitment] =useState("");
+  // const [testIdentity,setTestIdentity] = useState();
 
 
   const handleScan = async (scanData) => {
@@ -41,24 +64,10 @@ export default function Home() {
     console.error(err);
   };
 
-  const handleGenerateId = () => {
-    
-      const newIdentity = new Identity('secret-message');
-      const newTrapdoor = newIdentity.getTrapdoor();
-      const newNullifier = newIdentity.getNullifier();
-      const newIdentityCommitment = newIdentity.generateCommitment();
-      // console.log(newIdentityCommitment);
-
-      setTestIdentity(newIdentityCommitment);
-      // setTestIdentity(newIdentity);
-
-
-  }
-
-
 
   return (
-    <div className="App">
+    <div>
+      <div className="App">
     <h1>Hello World</h1>
       <h2>
         Last Scan:
@@ -90,8 +99,15 @@ export default function Home() {
       )}
       {loadingScan && <p>Loading</p>}
       {data !== "" && <p>{data}</p>}
-      <button onClick={handleGenerateId}>Generate Id</button>
-      <h1>Identity: {testIdentity.toString()}</h1>
+    </div>
+      <h1>Hello Zk World!</h1>
+      <button onClick={generateNewId}>1. Generate New Id</button>
+      <h5>Trapdoor</h5> 
+      <p>{trapdoor.toString()}</p>
+      <h5>Nullifier</h5>
+      <p>{nullifier.toString()}</p>
+      <h5>Identity Commitment</h5>
+      <p>{identityCommitment.toString()}</p>
     </div>
   )
 }
