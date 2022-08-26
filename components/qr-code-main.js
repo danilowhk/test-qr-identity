@@ -112,11 +112,11 @@ export default function QrCodeReaderMain() {
         <p className="text-xl break-all px-20">{identityKey}</p>
       </div>
       <button className="bg-green-700 p-3 rounded-lg text-gray-200" onClick={generateQrCode}>3. Generate QRCode</button>
-      {imageUrl ? (<a href={imageUrl} download="semaphore-identity-qrcde.png" className="flex items-center justify-center flex-col">
+      {imageUrl ? (<a href={imageUrl} download="semaphore.png" className="flex items-center justify-center flex-col">
                       <img src={imageUrl} alt="img"/>
                       <p className="text-xl font-bold"> Click Here to Download PNG</p>
                     </a>) : null}
-      {imageUrl ? (<a href={imageUrl} download="semaphore-identity-qrcde.jpg" className="flex items-center justify-center flex-col">
+      {imageUrl ? (<a href={imageUrl} download="semaphore.jpg" className="flex items-center justify-center flex-col">
                       <img src={imageUrl} alt="img"/>
                       <p className="text-xl font-bold"> Click Here to Download JPG</p>
                     </a>) : null}
