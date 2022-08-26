@@ -114,7 +114,11 @@ export default function QrCodeReaderMain() {
       <button className="bg-green-700 p-3 rounded-lg text-gray-200" onClick={generateQrCode}>3. Generate QRCode</button>
       {imageUrl ? (<a href={imageUrl} download="semaphore-identity-qrcde.png" className="flex items-center justify-center flex-col">
                       <img src={imageUrl} alt="img"/>
-                      <p className="text-xl font-bold"> Click Here to Download</p>
+                      <p className="text-xl font-bold"> Click Here to Download PNG</p>
+                    </a>) : null}
+      {imageUrl ? (<a href={imageUrl} download="semaphore-identity-qrcde.jpg" className="flex items-center justify-center flex-col">
+                      <img src={imageUrl} alt="img"/>
+                      <p className="text-xl font-bold"> Click Here to Download JPG</p>
                     </a>) : null}
 
       <button className="bg-green-700 p-3 rounded-lg text-gray-200" onClick={handleUploadQrCode}>4. Upload Qr Code</button>
