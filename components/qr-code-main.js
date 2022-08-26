@@ -78,11 +78,7 @@ export default function QrCodeReaderMain() {
     </h2>
     <h2 className="text-xl font-bold">
         (You can jump step 1. Invitation Code Scan)
-    </h2>
-
-
-
-    
+    </h2> 
       <button className="bg-blue-700 p-3 rounded-lg text-gray-200"
         onClick={() => {
           setStartScan(!startScan);
@@ -116,7 +112,7 @@ export default function QrCodeReaderMain() {
         <p className="text-xl break-all px-20">{identityKey}</p>
       </div>
       <button className="bg-green-700 p-3 rounded-lg text-gray-200" onClick={generateQrCode}>3. Generate QRCode</button>
-      {imageUrl ? (<a href={imageUrl} download className="flex items-center justify-center flex-col">
+      {imageUrl ? (<a href={imageUrl} download="semaphore-identity-qrcde.png" className="flex items-center justify-center flex-col">
                       <img src={imageUrl} alt="img"/>
                       <p className="text-xl font-bold"> Click Here to Download</p>
                     </a>) : null}
